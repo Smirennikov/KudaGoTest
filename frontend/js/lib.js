@@ -8,7 +8,7 @@
     var createSectionEvent = function(){
       // создаем контейнер для событий
       var section = document.createElement('section');
-      section.className = 'section kudaGo-section-events container active';
+      section.className = 'section kudaGo-section-events container flex';
       initialScreen.after(section);
       return section;
     }();
@@ -22,6 +22,7 @@
           price = document.createElement('p'),
           type = document.createElement('p');
       div.className = 'kudaGo-event flex';
+      price.className = 'price'
       button.className = 'button kudaGo-event__button-favorite'
       button.innerHTML = 'Добавить в избранное'
       title.innerHTML = data[i].title;
@@ -37,6 +38,8 @@
       createSectionEvent.appendChild(div);
     };
 
+
+
     var filterEvent = function(){
       var formButtons = document.querySelectorAll('.kudaGo-form .button'),
           formButtonsLength = formButtons.length;
@@ -45,6 +48,8 @@
           event.preventDefault();
           if(this.innerHTML === 'Концерты'){
             formButtons[1].classList.remove('active')
+            formButtons[2].classList.remove('active')
+            formButtons[3].classList.remove('active')
             this.classList.toggle('active')
             if(this.getAttribute('class') === 'button active'){
               createSectionEvent.innerHTML = '';
@@ -55,11 +60,44 @@
             }
           }else if(this.innerHTML === 'Выставки'){
             formButtons[0].classList.remove('active')
+            formButtons[2].classList.remove('active')
+            formButtons[3].classList.remove('active')
             this.classList.toggle('active')
 
             if(this.getAttribute('class') === 'button active'){
               createSectionEvent.innerHTML = '';
               sortTypeEvents('exhibition');
+            }else{
+              createSectionEvent.innerHTML = '';
+              goingToMas(createEvent);
+            }
+          }
+        })
+      }
+    }
+
+    var sortingEvent = function(){
+      var formButtons = document.querySelectorAll('.kudaGo-form .button'),
+          formButtonsLength = formButtons.length;
+      for(let i = 2; i < formButtonsLength; i += 1){
+        formButtons[i].addEventListener('click', function(event){
+          event.preventDefault();
+          this.classList.add('active')
+          if(this.innerHTML === 'По возрастанию'){
+
+            if(this.getAttribute('class') === 'button active'){
+              formButtons[3].classList.remove('active')
+              sortCoast('up')
+            }else{
+              createSectionEvent.innerHTML = '';
+              goingToMas(createEvent);
+            }
+          }else if(this.innerHTML === 'По убыванию'){
+
+
+            if(this.getAttribute('class') === 'button active'){
+              formButtons[2].classList.remove('active')
+              sortCoast('down')
             }else{
               createSectionEvent.innerHTML = '';
               goingToMas(createEvent);
@@ -131,11 +169,78 @@
         })
       }
     }
+    var masCoastSorted = function(){
+      // сортируем по цене и ее возрастанию
+      var masCoast = [];
+      for(let dataLength = data.length, i = 0; i < dataLength; i += 1){
+          masCoast.push(data[i].price)
+      }
+      masCoast.sort(function(a,b){
+        return a - b;
+      })
+      return masCoast;
+    }
+
+
+    var searching = (function(){
+        var searchInput = document.querySelector('.kudaGo-form input'),
+        section = document.querySelector('.section');
+
+        searchInput.addEventListener('keyup', function(){
+          if(searchInput.value === ''){
+            section.innerHTML = ''
+            goingToMas(createEvent)
+          }else{
+            section.innerHTML = '';
+            var regExp = new RegExp(searchInput.value, 'i')
+            searchEvents(regExp);
+          }
+          console.log(searchInput.value)
+        })
+    }())
+
+    function sortCoast(sort){
+      // выводим по сортировке цены
+      var allEvents = document.querySelectorAll('.kudaGo-section-events .kudaGo-event'),
+      allEventsLength = allEvents.length,
+      masIndex = function(i){
+        // находим индекс массива в зависимости от цены события
+        return masCoastSorted().indexOf(parseInt(allEvents[i].querySelector('.price').innerHTML));
+      },
+      masIndexReverse = function(i){
+        // реверсируем
+        // находим индекс массива в зависимости от цены события
+        return masCoastSorted().reverse().indexOf(parseInt(allEvents[i].querySelector('.price').innerHTML));
+      };
+
+      if(sort === 'up'){
+        for(var i = 0; i < allEventsLength; i += 1){
+          allEvents[i].style.order = masIndex(i);
+        }
+      }else if(sort === 'down'){
+        for(var i = 0; i < allEventsLength; i += 1){
+          allEvents[i].style.order = masIndexReverse(i);
+        }
+      }
+
+    }
 
     function sortTypeEvents(typeEvent){
       // сортируем по типу события
       for(let dataLength = data.length, i = 0; i < dataLength; i += 1){
         if(data[i].type === typeEvent){
+          createEvent(i);
+          addToFavorite();
+        }
+      }
+    }
+
+
+    function searchEvents(title){
+      // сортируем по типу события
+      for(let dataLength = data.length, i = 0; i < dataLength; i += 1){
+
+        if(title.test(data[i].title)||title.test(data[i].description)){
           createEvent(i);
           addToFavorite();
         }
@@ -168,7 +273,10 @@
       data = JSON.parse(data);
       goingToMas(createEvent);
       filterEvent();
+
       checkedTab();
+
+      sortingEvent();
     }
 
 }());

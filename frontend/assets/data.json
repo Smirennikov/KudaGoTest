@@ -1,5 +1,11 @@
 [
   {
+  "title": "Еще 1 событие",
+  "description": "Описание концерта здесь",
+  "price": 342,
+  "type": "concert"
+  },
+  {
   "title": "Концерт Depeche Mode",
   "description": "Описание концерта здесь",
   "price": 300,
@@ -9,6 +15,18 @@
   "title": "Выставка Модильяни",
   "description": "Описание выставки здесь",
   "price": 200,
+  "type": "exhibition"
+  },
+  {
+  "title": "Еще 2 событие",
+  "description": "Для проверки сортировки цены",
+  "price": 809,
+  "type": "exhibition"
+  },
+  {
+  "title": "Еще 3 событие",
+  "description": "Для проверки сортировки цены",
+  "price": 500,
   "type": "exhibition"
   }
 ]

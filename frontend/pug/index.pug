@@ -19,11 +19,13 @@ html(lang='ru')
           
           form.kudaGo-form
             input(type="text" name='search' placeholder="Поиск по заголовку/описанию события")
-            button.button Концерты
-            button.button Выставки
-            span сортировать по цене:
-            button.button По возрастанию
-            button.button По убыванию
+            .flex
+              button.button Концерты
+              button.button Выставки
+              .kudaGo-form__sorting.flex
+                span сортировать по цене:
+                button.button По возрастанию
+                button.button По убыванию
 
     footer.footer
-      script(src='js/lib.js')
+      script(src='js/lib.min.js')

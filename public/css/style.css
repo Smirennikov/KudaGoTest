@@ -159,6 +159,11 @@
     margin-top: 20px;
 }
 
+.initial-screen .wrap .kudaGo-form .flex
+{
+    align-items: center;
+}
+
 .initial-screen .wrap .kudaGo-form input[type='text']
 {
     width: 100%;
@@ -179,7 +184,7 @@
 
 .initial-screen .wrap .kudaGo-form button
 {
-    margin-right: 3px;
+    margin-right: 7px;
 }
 
 .initial-screen .wrap .kudaGo-form button:last-child
@@ -198,7 +203,10 @@
     position: relative;
     z-index: 2;
 
+    flex-direction: column;
+
     margin-top: 60px;
+    padding-bottom: 150px;
 }
 
 .section .notfavorites
@@ -220,6 +228,21 @@
 
     align-items: center;
     justify-content: space-between;
+}
+
+.kudaGo-event h3
+{
+    width: 210px;
+}
+
+.kudaGo-event p:nth-child(2)
+{
+    width: 300px;
+}
+
+.kudaGo-event .price
+{
+    width: 50px;
 }
 
 .kudaGo-event .button.favorite
@@ -292,4 +315,145 @@ input
 input[type='submit'] + label
 {
     cursor: pointer;
+}
+
+@media (max-width: 1024px)
+{
+    .container
+    {
+        padding: 0 35px;
+    }
+
+    .kudaGo-event h3
+    {
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+    }
+
+    .kudaGo-event p:nth-child(2)
+    {
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+    }
+}
+
+@media (max-width: 830px)
+{
+    .initial-screen .wrap .kudaGo-form span
+    {
+        margin: 0 10px 0 0;
+    }
+
+    .kudaGo-event
+    {
+        padding: 35px 30px;
+
+        flex-wrap: wrap;
+    }
+
+    .kudaGo-event .button
+    {
+        width: 100%;
+        margin-top: 25px;
+    }
+
+    .kudaGo-form__sorting
+    {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .kudaGo-form .flex
+    {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 650px)
+{
+    .kudaGo-event
+    {
+        justify-content: flex-start;
+    }
+
+    .kudaGo-event h3
+    {
+        font-size: 1.375rem;
+
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .kudaGo-event p
+    {
+        line-height: 1.6875rem;
+
+        margin-right: 20px;
+    }
+
+    .initial-screen .wrap h1
+    {
+        font-size: 4.375rem;
+    }
+
+    .initial-screen .wrap p
+    {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 570px)
+{
+    .tab
+    {
+        margin-bottom: 15px;
+    }
+
+    .initial-screen .wrap .kudaGo-form span
+    {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 465px)
+{
+    .initial-screen .wrap h1
+    {
+        font-size: 3.125rem;
+    }
+}
+
+@media (max-width: 380px)
+{
+    .container
+    {
+        padding: 0 15px;
+    }
+
+    .kudaGo-tabs
+    {
+        text-align: center;
+    }
+
+    .initial-screen .wrap h1
+    {
+        font-size: 2.5rem;
+
+        text-align: center;
+    }
+
+    .initial-screen .wrap p
+    {
+        display: none;
+    }
+
+    .initial-screen .wrap .kudaGo-form button
+    {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
 }
