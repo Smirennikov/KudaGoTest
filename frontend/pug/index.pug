@@ -1,0 +1,29 @@
+doctype html
+html(lang='ru')
+  head
+    meta(name='robots' content='none')
+    meta( charset='utf-8')
+    meta(name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover")
+    link( rel='stylesheet' href='css/style.min.css')
+    title KudaGoTest
+  body
+    main.main
+      .initial-screen
+        .wrap.container 
+          h1 KudaGo
+            span Test
+          p responsive разметка для десктопа/телефонов и сохранение состояния приложения между перезагрузками страницы
+          .kudaGo-tabs
+            button.tab.tab--search.active Поиск событий
+            button.tab.tab--favorite Избранные события
+          
+          form.kudaGo-form
+            input(type="text" name='search' placeholder="Поиск по заголовку/описанию события")
+            button.button Концерты
+            button.button Выставки
+            span сортировать по цене:
+            button.button По возрастанию
+            button.button По убыванию
+
+    footer.footer
+      script(src='js/lib.js')
